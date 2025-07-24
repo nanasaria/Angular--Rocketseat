@@ -144,5 +144,43 @@ Com eventos:
   Toggle
 </button>
 
+Recurso de Input
+O recurso de input se refere ao decorador @input, que é 
+usado para passar dados de um componente pai para um 
+componente filho.
+
+Exemplo:
+Componente filho:
+import { Component, Input } from '@angular/core';
+
+@Component({
+  selector: 'app-child',
+  template: `<p>Nome recebido: {{ nome }}</p>`
+})
+export class ChildComponent {
+  @Input() nome: string = '';
+}
+
+Componente pai: 
+<app-child [nome]="'Chappel'"></app-child>
+
+Quando usar?
+Para compartilhar dados entre componentes, especialmente 
+quando um componente filho precisa exibir ou usar dados 
+que vêm do pai.
+Por exemplo, em componentes reutilizáveis como cards, botões 
+customizados, modais etc.
+
+ng-content
+Usado para criar conteúdo projetado (content projection), ou
+seja: permite que você insira conteúdo personalizado dentro
+de um componente reutilizável.
+
+Para que serve?
+Imagine que você criou um componente de layout, como um 
+cartão (card), e quer que ele possa exibir qualquer 
+conteúdo dentro dele. Em vez de travar o conteúdo, você usa 
+ng-content como espaço reservado.
+
 
  */

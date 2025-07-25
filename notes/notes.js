@@ -452,4 +452,73 @@ Com o @ViewChild, você pode:
 - Chamar métodos de componentes filhos
 - Obter referência a diretivas ou componentes
 
+Funcionalidade de Download
+Para isso podemos utilizar a biblioteca html2canvas
+
+npm install html2canvas
+
+O próximo passo é criar uma variável na div que você irá
+baixar.
+
+Ex:
+<div
+    #certificadoContainer
+    class="certificado d-flex justify-content-center align-items-center"
+  ></div>
+
+Depois pegar a referência no typescript:
+@ViewChild('certificadoContainer') certificadoElement!: ElementRef;
+
+O tipo ElementRef é uma referência nativa ao elemento DOM. 
+Como se fosse um document.getElementById(...), mas no Angular.
+
+Criando função de Download:
+downloadCertificado() {
+    if (this.certificado == undefined) {
+      return;
+    }
+
+    html2canvas(this.certificadoElement.nativeElement, { scale: 2 }).then(
+      (canvas) => {
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL('image/png');
+        link.download = `certificado_${this.certificado?.nome.replaceAll(
+          ' ',
+          '_'
+        )}.png`;
+        link.click();
+      }
+    );
+  }
+
+Observação: O scale serve para definir o zoom da imagem
+gerada a partir do elemento HTML.
+
+Nessa função, primeiro verificamos se o certificado existe.
+Depois capturamos o elemento HTML do certificado como imagem.
+O html2canvas é uma biblioteca JavaScript que tira um "print"
+de um elemento HTML e o converte em um canvas (Um tipo de 
+imagem renderizada no navegador).
+Depois criamos um elemento <a>, definimos a imagem gerada
+com o link de download, definimos o nome do arquivo que 
+será baixado e por fim disparamos o download automaticamente.
+
+Deploy da aplicação
+
+Se utilizarmos o netlify. Exemplo de configuração:
+[build]
+command = "ng build --configuration=production"
+publish = "dist/gerador-certificado"
+
+[[redirect]]
+from="/*"
+to = "/index.html"
+status = 200
+
+Comando para realizar o build:
+ng build --configuration=production
+
+Observação: Esse production é passado apenas em ambiente de
+produção.
+
  */

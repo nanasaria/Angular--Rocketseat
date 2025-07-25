@@ -1,4 +1,4 @@
-import { Component, ɵconvertToBitFlags } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { SecondaryButtonComponent } from '../secondary-button/secondary-button.component';
 import { Route, Router } from '@angular/router';
 
@@ -10,7 +10,9 @@ import { Route, Router } from '@angular/router';
   styleUrl: './item-certificado.component.css',
 })
 export class ItemCertificadoComponent {
-  id: string = '';
+  @Input() nomeAluno: string = '';
+  @Input() dataEmissao: string = '';
+  @Input() id: string = '';
 
   constructor(private router: Router) {}
 

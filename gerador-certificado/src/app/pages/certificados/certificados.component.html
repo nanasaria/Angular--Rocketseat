@@ -6,7 +6,7 @@
     </p>
   </div>
 
-  <!-- <div class="custom-card w-100">
+  <div class="custom-card w-100">
     <i class="ph ph-certificate"></i>
 
     <div class="custom-warning-titles">
@@ -14,8 +14,11 @@
       <p class="card-subtitle">Gere certificados para consultar o histórico</p>
     </div>
 
-    <app-secondary-button></app-secondary-button>
-  </div> -->
+    <app-secondary-button
+      routerLink="/certificados/novo"
+      textoBotao="Gerar certificado"
+    ></app-secondary-button>
+  </div>
 
   <div class="list-certificates w-100">
     <app-item-certificado></app-item-certificado>
